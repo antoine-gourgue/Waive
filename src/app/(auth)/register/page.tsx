@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 import { register } from "@/lib/supabase/auth-actions";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -64,9 +65,9 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{" "}
-          <a href="/login" className="font-medium text-accent hover:underline">
+          <Link href="/login" className="font-medium text-accent hover:underline">
             Sign in
-          </a>
+          </Link>
         </p>
       </div>
     </div>

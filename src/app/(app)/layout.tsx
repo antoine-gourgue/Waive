@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "@/components/ui/logout-button";
 
@@ -22,9 +23,9 @@ export default async function AppLayout({
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-border">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-          <a href="/trips" className="text-lg font-semibold tracking-tight">
+          <Link href="/trips" className="text-lg font-semibold tracking-tight">
             Waive
-          </a>
+          </Link>
           <div className="flex items-center gap-4">
             {email && (
               <span className="text-sm text-muted-foreground">{email}</span>
