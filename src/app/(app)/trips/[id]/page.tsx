@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { DeleteTripButton } from "@/components/trips/delete-trip-button";
 import type { Trip, AppError } from "@/types";
 
@@ -37,7 +38,7 @@ export default async function TripDetailPage({ params }: TripDetailPageProps) {
   if (error) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-10">
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
           {error.message}
         </div>
       </div>
@@ -78,7 +79,7 @@ export default async function TripDetailPage({ params }: TripDetailPageProps) {
         <div className="flex gap-2">
           <Link
             href={`/trips/${trip.id}/edit`}
-            className="inline-flex items-center rounded-md border border-border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
+            className="inline-flex items-center justify-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
           >
             Edit
           </Link>
@@ -86,22 +87,32 @@ export default async function TripDetailPage({ params }: TripDetailPageProps) {
         </div>
       </div>
 
-      <div className="mt-8 space-y-6">
-        <div className="rounded-lg border border-border p-5">
-          <h2 className="text-sm font-medium text-muted-foreground">Dates</h2>
-          <p className="mt-1 text-foreground">
-            {startDate}
-            {endDate && ` — ${endDate}`}
-          </p>
-        </div>
+      <div className="mt-8 space-y-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Dates
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-foreground">
+              {startDate}
+              {endDate && ` — ${endDate}`}
+            </p>
+          </CardContent>
+        </Card>
 
         {trip.description && (
-          <div className="rounded-lg border border-border p-5">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              Description
-            </h2>
-            <p className="mt-1 text-foreground">{trip.description}</p>
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Description
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-foreground">{trip.description}</p>
+            </CardContent>
+          </Card>
         )}
       </div>
     </div>

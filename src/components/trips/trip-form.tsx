@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { Input } from "@/components/ui/input";
+import { FormField } from "@/components/ui/form-field";
 import { Button } from "@/components/ui/button";
 import type { Trip, AppError } from "@/types";
 
@@ -25,35 +25,35 @@ export function TripForm({ trip, action, submitLabel }: TripFormProps) {
 
   return (
     <form action={formAction} className="space-y-5">
-      <Input
+      <FormField
         label="Title"
         name="title"
         defaultValue={trip?.title}
         placeholder="e.g. Japan Spring 2026"
         required
       />
-      <Input
+      <FormField
         label="Destination"
         name="destination"
         defaultValue={trip?.destination}
         placeholder="e.g. Tokyo, Japan"
         required
       />
-      <Input
+      <FormField
         label="Description"
         name="description"
         defaultValue={trip?.description ?? ""}
         placeholder="A short description of your trip"
       />
       <div className="grid grid-cols-2 gap-4">
-        <Input
+        <FormField
           label="Start date"
           name="start_date"
           type="date"
           defaultValue={trip?.start_date}
           required
         />
-        <Input
+        <FormField
           label="End date"
           name="end_date"
           type="date"
@@ -62,7 +62,7 @@ export function TripForm({ trip, action, submitLabel }: TripFormProps) {
       </div>
 
       {state.error && (
-        <p className="text-sm text-red-600">{state.error.message}</p>
+        <p className="text-sm text-destructive">{state.error.message}</p>
       )}
 
       <div className="flex gap-3">

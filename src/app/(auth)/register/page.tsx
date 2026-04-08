@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { register } from "@/lib/supabase/auth-actions";
-import { Input } from "@/components/ui/input";
+import { FormField } from "@/components/ui/form-field";
 import { Button } from "@/components/ui/button";
 import type { AppError } from "@/types";
 
@@ -32,21 +32,21 @@ export default function RegisterPage() {
         </div>
 
         <form action={formAction} className="space-y-4">
-          <Input
+          <FormField
             label="Email"
             name="email"
             type="email"
             autoComplete="email"
             required
           />
-          <Input
+          <FormField
             label="Password"
             name="password"
             type="password"
             autoComplete="new-password"
             required
           />
-          <Input
+          <FormField
             label="Confirm password"
             name="confirmPassword"
             type="password"
@@ -55,7 +55,7 @@ export default function RegisterPage() {
           />
 
           {state.error && (
-            <p className="text-sm text-red-600">{state.error.message}</p>
+            <p className="text-sm text-destructive">{state.error.message}</p>
           )}
 
           <Button type="submit" className="w-full" disabled={isPending}>

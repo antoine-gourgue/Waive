@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import type { Trip } from "@/types";
-import type { AppError } from "@/types";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import type { Trip, AppError } from "@/types";
 
 interface TripCardProps {
   trip: Trip;
@@ -15,15 +21,18 @@ function TripCard({ trip }: TripCardProps) {
   });
 
   return (
-    <Link
-      href={`/trips/${trip.id}`}
-      className="group block rounded-lg border border-border p-5 transition-colors hover:border-accent/30 hover:bg-muted/50"
-    >
-      <h3 className="font-medium text-foreground group-hover:text-accent">
-        {trip.title}
-      </h3>
-      <p className="mt-1 text-sm text-muted-foreground">{trip.destination}</p>
-      <p className="mt-3 text-xs text-muted-foreground">{startDate}</p>
+    <Link href={`/trips/${trip.id}`} className="group">
+      <Card className="transition-colors group-hover:ring-primary/30">
+        <CardHeader>
+          <CardTitle className="group-hover:text-primary">
+            {trip.title}
+          </CardTitle>
+          <CardDescription>{trip.destination}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-xs text-muted-foreground">{startDate}</p>
+        </CardContent>
+      </Card>
     </Link>
   );
 }
@@ -61,14 +70,14 @@ export default async function TripsPage() {
         </div>
         <Link
           href="/trips/new"
-          className="inline-flex items-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent/90"
+          className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80"
         >
           New trip
         </Link>
       </div>
 
       {error ? (
-        <div className="mt-10 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="mt-10 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
           {error.message}
         </div>
       ) : trips.length === 0 ? (

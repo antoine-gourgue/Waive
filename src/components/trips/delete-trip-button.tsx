@@ -16,7 +16,7 @@ export function DeleteTripButton({ tripId }: DeleteTripButtonProps) {
         }
       }}
     >
-      <Button type="submit" variant="secondary" className="text-red-600 hover:text-red-700">
+      <Button type="submit" variant="destructive">
         Delete
       </Button>
     </form>

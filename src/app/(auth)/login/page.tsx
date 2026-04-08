@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { login } from "@/lib/supabase/auth-actions";
-import { Input } from "@/components/ui/input";
+import { FormField } from "@/components/ui/form-field";
 import { Button } from "@/components/ui/button";
 import type { AppError } from "@/types";
 
@@ -32,14 +32,14 @@ export default function LoginPage() {
         </div>
 
         <form action={formAction} className="space-y-4">
-          <Input
+          <FormField
             label="Email"
             name="email"
             type="email"
             autoComplete="email"
             required
           />
-          <Input
+          <FormField
             label="Password"
             name="password"
             type="password"
@@ -48,7 +48,7 @@ export default function LoginPage() {
           />
 
           {state.error && (
-            <p className="text-sm text-red-600">{state.error.message}</p>
+            <p className="text-sm text-destructive">{state.error.message}</p>
           )}
 
           <Button type="submit" className="w-full" disabled={isPending}>
